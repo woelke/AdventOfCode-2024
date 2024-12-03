@@ -4,7 +4,7 @@ namespace AdventOfCode
 {
     public class PuzzleSetup(ISolver solver)
     {
-        private readonly string InputPath = $"C:\\Users\\woelke\\workspace\\AdventOfCode-2024\\Input\\Day{solver.Day}";
+        private readonly string InputPath = $"C:\\Users\\woelke\\workspace\\AdventOfCode-2024\\AdventOfCode\\Input\\Day{solver.Day}";
 
         private record Input(string Phase, int Idx, Mut<string[]?> PuzzleInput, Mut<string?> Result);
 
