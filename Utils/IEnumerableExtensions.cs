@@ -15,6 +15,12 @@
             return self;
         }
 
+        public static TResult To<TInput, TResult>(this IEnumerable<TInput> self, Func<IEnumerable<TInput>, TResult> fun)
+            => fun(self);
+
+        public static TResult To<TResult>(this string[] self, Func<string[], TResult> fun)
+            => fun(self);
+
         public static T? FirstOrNull<T>(this IEnumerable<T> self, Func<T, bool> predicate) where T : class
         {
             foreach (T item in self)
