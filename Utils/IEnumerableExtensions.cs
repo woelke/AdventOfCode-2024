@@ -21,6 +21,17 @@
         public static TResult To<TResult>(this string[] self, Func<string[], TResult> fun)
             => fun(self);
 
+        public static IEnumerable<(T, U)> Product<T, U>(this IEnumerable<T> self, IEnumerable<U> other)
+        {
+            foreach (var t in self)
+            {
+                foreach (var u in other)
+                {
+                    yield return (t, u);
+                }
+            }
+        }
+
         public static T? FirstOrNull<T>(this IEnumerable<T> self, Func<T, bool> predicate) where T : class
         {
             foreach (T item in self)

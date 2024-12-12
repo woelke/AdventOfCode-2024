@@ -52,7 +52,9 @@ namespace AdventOfCode
             LoadInput();
 
             foreach (var input in _exampleInputs)
+            {
                 PrintExample(input);
+            }
 
             Console.WriteLine();
 
