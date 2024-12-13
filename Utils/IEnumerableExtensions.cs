@@ -32,6 +32,16 @@
             }
         }
 
+        public static Int128 Sum(this IEnumerable<Int128> self)
+        {
+            Int128 sum = 0;
+            foreach (var v in self)
+                sum += v;
+
+            return sum;
+        }
+
+
         public static T? FirstOrNull<T>(this IEnumerable<T> self, Func<T, bool> predicate) where T : class
         {
             foreach (T item in self)

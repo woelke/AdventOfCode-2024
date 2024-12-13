@@ -1,3 +1,3 @@
 ﻿using AdventOfCode;
 
-new PuzzleSetup(new Day6()).CalcAll();
+new PuzzleSetup(new Day7()).CalcAll();
