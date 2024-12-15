@@ -41,6 +41,8 @@
             return sum;
         }
 
+        public static void Swap<T>(this List<T> list, int i, int j)
+            => (list[i], list[j]) = (list[j], list[i]);
 
         public static T? FirstOrNull<T>(this IEnumerable<T> self, Func<T, bool> predicate) where T : class
         {
