@@ -10,6 +10,7 @@ namespace AdventOfCode
     public class Day02 : ISolver
     {
         public string PuzzleFolder => nameof(Day02);
+        public (string Phase, int Idx)? PuzzleSelector => null;
 
         private bool IsReportSave(IEnumerable<int> l)
         {

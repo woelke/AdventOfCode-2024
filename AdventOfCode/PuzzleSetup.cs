@@ -9,14 +9,14 @@ namespace AdventOfCode
         private record Input(string Phase, int Idx, Mut<string[]?> PuzzleInput, Mut<string?> Result);
 
         private List<Input> _exampleInputs = [];
-        private string[] _puzzleInput = null!;
+        private string[]? _puzzleInput = null!;
 
         private void LoadInput()
         {
             foreach (var file in Directory.GetFiles(InputPath))
             {
                 var split = Path.GetFileName(file).Split("_");
-                if (split.Length == 1)
+                if (split.Length == 1 && solver.PuzzleSelector is null)
                 {
                     _puzzleInput = File.ReadAllLines(file);
                 }
@@ -25,6 +25,10 @@ namespace AdventOfCode
                     var phase = split[0];
                     var idx = Convert.ToInt32(split[1]);
                     bool isResult = split[2].StartsWith("result");
+
+                    if (solver.PuzzleSelector is not null
+                        && (solver.PuzzleSelector.Value.Phase != phase || solver.PuzzleSelector.Value.Idx != idx))
+                        continue;
 
                     var input = _exampleInputs.Find(e => e.Phase == phase && e.Idx == idx);
                     if (input is null)
@@ -52,16 +56,14 @@ namespace AdventOfCode
             LoadInput();
 
             foreach (var input in _exampleInputs)
-            {
-                PrintExample(input);
-            }
+                DoExamples(input);
 
             Console.WriteLine();
 
-            PrintPuzzle();
+            DoPuzzles();
         }
 
-        private void PrintExample(Input input)
+        private void DoExamples(Input input)
         {
             string? res;
 
@@ -75,8 +77,11 @@ namespace AdventOfCode
             Console.WriteLine($"{input.Phase}_{input.Idx} Result: \"{res}\" ({(res == input.Result.Val!.Trim() ? "Ok" : "Failed")})");
         }
 
-        private void PrintPuzzle()
+        private void DoPuzzles()
         {
+            if (_puzzleInput is null)
+                return;
+
             Console.WriteLine($" Result A: {solver.CalcA(_puzzleInput)}");
             Console.WriteLine($" Result B: {solver.CalcB(_puzzleInput)}");
         }

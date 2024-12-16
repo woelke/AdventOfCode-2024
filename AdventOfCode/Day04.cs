@@ -11,6 +11,7 @@ namespace AdventOfCode
     public class Day04 : ISolver
     {
         public string PuzzleFolder => nameof(Day04);
+        public (string Phase, int Idx)? PuzzleSelector => null;
 
         IEnumerable<IEnumerable<(int X, int Y, char C)>> GetPosssXMas()
         {

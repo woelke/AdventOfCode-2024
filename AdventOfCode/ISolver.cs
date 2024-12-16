@@ -9,6 +9,8 @@ namespace AdventOfCode
     public interface ISolver
     {
         string PuzzleFolder { get; }
+        (string Phase, int Idx)? PuzzleSelector { get; }
+
         string? CalcA(string[] lines);
         string? CalcB(string[] lines);
     }

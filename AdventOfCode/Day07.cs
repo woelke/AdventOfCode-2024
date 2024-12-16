@@ -12,6 +12,7 @@ namespace AdventOfCode
     public class Day07 : ISolver
     {
         public string PuzzleFolder => nameof(Day07);
+        public (string Phase, int Idx)? PuzzleSelector => null;
 
         bool IsOkA(Int128 goal, Int128 current, List<Int128> vals)
         {

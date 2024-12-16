@@ -11,6 +11,7 @@ namespace AdventOfCode
     public class Day03 : ISolver
     {
         public string PuzzleFolder => nameof(Day03);
+        public (string Phase, int Idx)? PuzzleSelector => null;
 
         IEnumerable<(long A, long B)> GetMuls(string x)
         {

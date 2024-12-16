@@ -11,6 +11,7 @@ namespace AdventOfCode
     public class Day06 : ISolver
     {
         public string PuzzleFolder => nameof(Day06);
+        public (string Phase, int Idx)? PuzzleSelector => null;
 
         public string? CalcA(string[] lines)
         {

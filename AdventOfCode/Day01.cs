@@ -9,6 +9,7 @@ namespace AdventOfCode
     public class Day01 : ISolver
     {
         public string PuzzleFolder => nameof(Day01);
+        public (string Phase, int Idx)? PuzzleSelector => null;
 
         public string? CalcA(string[] lines)
         {

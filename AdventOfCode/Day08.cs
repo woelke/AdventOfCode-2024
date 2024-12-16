@@ -10,6 +10,7 @@ namespace AdventOfCode
     public class Day08 : ISolver
     {
         public string PuzzleFolder => nameof(Day08);
+        public (string Phase, int Idx)? PuzzleSelector => null;
 
         public Dictionary<char, List<(int X, int Y)>> ParseInput(string[] lines)
         {

@@ -1,3 +1,7 @@
 ﻿using AdventOfCode;
 
-new PuzzleSetup(new Day09()).CalcAll();
+var day = new Day10();
+
+Console.WriteLine($"Puzzle: {day.PuzzleFolder}");
+
+new PuzzleSetup(day).CalcAll();
