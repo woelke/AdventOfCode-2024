@@ -7,9 +7,9 @@ using Utils;
 
 namespace AdventOfCode
 {
-    public class Day8 : ISolver
+    public class Day08 : ISolver
     {
-        public int Day => 8;
+        public string PuzzleFolder => nameof(Day08);
 
         public Dictionary<char, List<(int X, int Y)>> ParseInput(string[] lines)
         {

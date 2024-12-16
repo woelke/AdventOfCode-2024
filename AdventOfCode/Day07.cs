@@ -9,9 +9,9 @@ using Utils;
 
 namespace AdventOfCode
 {
-    public class Day7 : ISolver
+    public class Day07 : ISolver
     {
-        public int Day => 7;
+        public string PuzzleFolder => nameof(Day07);
 
         bool IsOkA(Int128 goal, Int128 current, List<Int128> vals)
         {

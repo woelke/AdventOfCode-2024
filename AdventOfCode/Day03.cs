@@ -8,9 +8,9 @@ using Utils;
 
 namespace AdventOfCode
 {
-    public class Day3 : ISolver
+    public class Day03 : ISolver
     {
-        public int Day => 3;
+        public string PuzzleFolder => nameof(Day03);
 
         IEnumerable<(long A, long B)> GetMuls(string x)
         {

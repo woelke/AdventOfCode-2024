@@ -7,9 +7,9 @@ using Utils;
 
 namespace AdventOfCode
 {
-    public class Day2 : ISolver
+    public class Day02 : ISolver
     {
-        public int Day => 2;
+        public string PuzzleFolder => nameof(Day02);
 
         private bool IsReportSave(IEnumerable<int> l)
         {

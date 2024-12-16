@@ -8,9 +8,9 @@ using Utils;
 
 namespace AdventOfCode
 {
-    public class Day4 : ISolver
+    public class Day04 : ISolver
     {
-        public int Day => 4;
+        public string PuzzleFolder => nameof(Day04);
 
         IEnumerable<IEnumerable<(int X, int Y, char C)>> GetPosssXMas()
         {

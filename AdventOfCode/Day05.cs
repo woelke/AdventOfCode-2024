@@ -8,9 +8,9 @@ using Utils;
 
 namespace AdventOfCode
 {
-    public class Day5 : ISolver
+    public class Day05 : ISolver
     {
-        public int Day => 5;
+        public string PuzzleFolder => nameof(Day05);
 
         (List<(int A, int B)> Orders, List<List<int>> Updates) ParseInput(string[] lines)
         {

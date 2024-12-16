@@ -8,9 +8,9 @@ using Utils;
 
 namespace AdventOfCode
 {
-    public class Day6 : ISolver
+    public class Day06 : ISolver
     {
-        public int Day => 6;
+        public string PuzzleFolder => nameof(Day06);
 
         public string? CalcA(string[] lines)
         {

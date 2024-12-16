@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace AdventOfCode
 {
-    public class Day1 : ISolver
+    public class Day01 : ISolver
     {
-        public int Day => 1;
+        public string PuzzleFolder => nameof(Day01);
 
         public string? CalcA(string[] lines)
         {

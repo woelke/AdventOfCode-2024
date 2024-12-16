@@ -8,7 +8,7 @@ namespace AdventOfCode
 {
     public interface ISolver
     {
-        int Day { get; }
+        string PuzzleFolder { get; }
         string? CalcA(string[] lines);
         string? CalcB(string[] lines);
     }
