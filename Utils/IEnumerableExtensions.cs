@@ -9,9 +9,9 @@
         public static T Second<T>(this IEnumerable<T> self)
             => self.Skip(1).First();
 
-        public static IEnumerable<T> PrintMe<T>(this IEnumerable<T> self)
+        public static IEnumerable<T> PrintMe<T>(this IEnumerable<T> self, string prepend = "")
         {
-            Console.WriteLine(string.Join(", ", self));
+            Console.WriteLine($"{prepend}{string.Join(", ", self)}");
             return self;
         }
 
