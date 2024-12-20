@@ -29,7 +29,7 @@ namespace AdventOfCode
                 return false;
         }
 
-        public string? CalcA(string[] lines)
+        public string? CalcA(string[] lines, PuzzleInfo info)
         {
             var calcs = lines.Select(l => l.Split(':').To(e => (Int128.Parse(e[0].Trim()), e[1].Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(f => Int128.Parse(f.Trim())))));
 
@@ -54,7 +54,7 @@ namespace AdventOfCode
         }
 
 
-        public string? CalcB(string[] lines)
+        public string? CalcB(string[] lines, PuzzleInfo info)
         {
             var calcs = lines.Select(l => l.Split(':').To(e => (Int128.Parse(e[0].Trim()), e[1].Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(f => Int128.Parse(f.Trim())))));
 

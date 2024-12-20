@@ -67,10 +67,12 @@ namespace AdventOfCode
         {
             string? res;
 
+            var info = new PuzzleInfo(input.Phase, input.Idx);
+
             if (input.Phase == "a")
-                res = solver.CalcA(input.PuzzleInput.Val!)?.Trim();
+                res = solver.CalcA(input.PuzzleInput.Val!, info)?.Trim();
             else if (input.Phase == "b")
-                res = solver.CalcB(input.PuzzleInput.Val!)?.Trim();
+                res = solver.CalcB(input.PuzzleInput.Val!, info)?.Trim();
             else
                 throw new ArgumentException("Phase neither a nor b");
 
@@ -82,8 +84,9 @@ namespace AdventOfCode
             if (_puzzleInput is null)
                 return;
 
-            Console.WriteLine($" Result A: {solver.CalcA(_puzzleInput)}");
-            Console.WriteLine($" Result B: {solver.CalcB(_puzzleInput)}");
+            var info = new PuzzleInfo("puzzle", 0);
+            Console.WriteLine($" Result A: {solver.CalcA(_puzzleInput, info)}");
+            Console.WriteLine($" Result B: {solver.CalcB(_puzzleInput, info)}");
         }
     }
 }

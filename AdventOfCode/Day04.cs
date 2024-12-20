@@ -48,7 +48,7 @@ namespace AdventOfCode
             }
         }
 
-        public string? CalcA(string[] lines)
+        public string? CalcA(string[] lines, PuzzleInfo info)
         {
             var map = new Map(lines);
 
@@ -80,7 +80,7 @@ namespace AdventOfCode
         }
 
 
-        public string? CalcB(string[] lines)
+        public string? CalcB(string[] lines, PuzzleInfo info)
         {
             var map = new Map(lines);
 

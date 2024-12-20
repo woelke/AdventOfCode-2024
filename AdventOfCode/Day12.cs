@@ -68,7 +68,7 @@ namespace AdventOfCode
             return s.Count * ((s.Count * 4) - noFenceCount);
         }
 
-        public string? CalcA(string[] lines)
+        public string? CalcA(string[] lines, PuzzleInfo info)
         {
             var areass = GetAreass(lines);
 
@@ -118,7 +118,7 @@ namespace AdventOfCode
         int CalcPriceB(HashSet<(int X, int Y)> s)
             => CountEdges(s) * s.Count;
 
-        public string? CalcB(string[] lines)
+        public string? CalcB(string[] lines, PuzzleInfo info)
         {
             var areass = GetAreass(lines);
 

@@ -11,7 +11,7 @@ namespace AdventOfCode
         public string PuzzleFolder => nameof(Day01);
         public (string Phase, int Idx)? PuzzleSelector => null;
 
-        public string? CalcA(string[] lines)
+        public string? CalcA(string[] lines, PuzzleInfo info)
         {
             var raw = lines.Select(e => e.Split("   ").Select(s => Convert.ToInt32(s)));
             var l = raw.Select(e => e.First()).Order();
@@ -20,7 +20,7 @@ namespace AdventOfCode
             return res.ToString();
         }
 
-        public string? CalcB(string[] lines)
+        public string? CalcB(string[] lines, PuzzleInfo info)
         {
             var raw = lines.Select(e => e.Split("   ").Select(s => Convert.ToInt32(s)));
             var ls = raw.Select(e => e.First());

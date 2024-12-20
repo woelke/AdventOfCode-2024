@@ -29,14 +29,14 @@ namespace AdventOfCode
                 .Select(m => IsReportSave(m))
                 .Any(e => e);
 
-        public string? CalcA(string[] lines)
+        public string? CalcA(string[] lines, PuzzleInfo info)
             => lines
                 .Select(l => l.Split(" ").Select(v => Convert.ToInt32(v)))
                 .Select(IsReportSave)
                 .Count(v => v)
                 .ToString();
 
-        public string? CalcB(string[] lines)
+        public string? CalcB(string[] lines, PuzzleInfo info)
             => lines
                 .Select(l => l.Split(" ").Select(v => Convert.ToInt32(v)))
                 .Select(l => IsReportSave(l) || IsAnySubReportSave(l))

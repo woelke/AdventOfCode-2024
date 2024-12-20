@@ -34,7 +34,7 @@ namespace AdventOfCode
             return disk;
         }
 
-        public string? CalcA(string[] lines)
+        public string? CalcA(string[] lines, PuzzleInfo info)
         {
             var disk = ParseInput(lines);
 
@@ -66,7 +66,7 @@ namespace AdventOfCode
             Console.WriteLine();
         }
 
-        public string? CalcB(string[] lines)
+        public string? CalcB(string[] lines, PuzzleInfo info)
         {
             var disk = ParseInput(lines);
 

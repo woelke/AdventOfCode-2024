@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualBasic;
-using Utils;
+﻿using Utils;
 
 namespace AdventOfCode
 {
@@ -65,13 +64,13 @@ namespace AdventOfCode
         }
 
 
-        public string? CalcA(string[] lines)
+        public string? CalcA(string[] lines, PuzzleInfo info)
             => ParseInput(lines)
                 .Select(e => GetSolution(e.V, e.W).To(s => s._1 * 3L + s._2))
                 .Sum()
                 .ToString();
 
-        public string? CalcB(string[] lines)
+        public string? CalcB(string[] lines, PuzzleInfo info)
             => ParseInput(lines)
                 .Select(e => (V: e.V.ForB(), W: e.W.ForB()))
                 .Select(e => GetSolution(e.V, e.W).To(s => s._1 * 3L + s._2))

@@ -43,7 +43,7 @@ namespace AdventOfCode
             }
         }
 
-        public string? CalcA(string[] lines)
+        public string? CalcA(string[] lines, PuzzleInfo info)
         {
             var map = ToMap(lines);
 
@@ -74,7 +74,7 @@ namespace AdventOfCode
                 + GetRating(map, (cPos.X, cPos.Y - 1), cHeight);
         }
 
-        public string? CalcB(string[] lines)
+        public string? CalcB(string[] lines, PuzzleInfo info)
         {
             var map = ToMap(lines);
 

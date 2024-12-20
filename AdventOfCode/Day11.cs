@@ -70,7 +70,7 @@ namespace AdventOfCode
             return sum;
         }
 
-        public string? CalcA(string[] lines)
+        public string? CalcA(string[] lines, PuzzleInfo info)
         {
             var sum = 0L;
 
@@ -80,7 +80,7 @@ namespace AdventOfCode
             return sum.ToString();
         }
 
-        public string? CalcB(string[] lines)
+        public string? CalcB(string[] lines, PuzzleInfo info)
         {
             var sum = 0L;
 

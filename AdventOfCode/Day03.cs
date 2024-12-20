@@ -69,7 +69,7 @@ namespace AdventOfCode
         }
 
 
-        public string? CalcA(string[] lines)
+        public string? CalcA(string[] lines, PuzzleInfo info)
             => lines.Select(l => GetMuls(l)).SelectMany(e => e).Select(e => e.A * e.B).Sum().ToString();
 
 
@@ -109,7 +109,7 @@ namespace AdventOfCode
             }
         }
 
-        public string? CalcB(string[] lines)
+        public string? CalcB(string[] lines, PuzzleInfo info)
             => GetEnabled(string.Join("", lines))
                 .Select(e => GetMuls(e))
                 .SelectMany(e => e)

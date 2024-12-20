@@ -13,7 +13,7 @@ namespace AdventOfCode
         public string PuzzleFolder => nameof(Day06);
         public (string Phase, int Idx)? PuzzleSelector => null;
 
-        public string? CalcA(string[] lines)
+        public string? CalcA(string[] lines, PuzzleInfo info)
         {
             List<List<char>> map = lines.Select(e => e.ToCharArray().ToList()).ToList(); // y, x
 
@@ -127,7 +127,7 @@ namespace AdventOfCode
             }
         }
 
-        public string? CalcB(string[] lines)
+        public string? CalcB(string[] lines, PuzzleInfo info)
         {
             var refMap = lines.Select(e => e.ToCharArray().Select(f => (f, 0)).ToList()).ToList(); // y, x
 

@@ -37,7 +37,7 @@ namespace AdventOfCode
         public (int X, int Y) CalcAntinode((int X, int Y) p1, (int X, int Y) p2)
             => (p1.X + (p1.X - p2.X), p1.Y + (p1.Y - p2.Y));
 
-        public string? CalcA(string[] lines)
+        public string? CalcA(string[] lines, PuzzleInfo info)
         {
             var map = ParseInput(lines);
 
@@ -72,7 +72,7 @@ namespace AdventOfCode
             }
         }
 
-        public string? CalcB(string[] lines)
+        public string? CalcB(string[] lines, PuzzleInfo info)
         {
             var map = ParseInput(lines);
 
