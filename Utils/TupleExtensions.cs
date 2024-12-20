@@ -57,5 +57,15 @@ namespace Utils
 
         public static (U _1, U _2, U _3, U _4) Select<T, U>(this (T _1, T _2, T _3, T _4) s, Func<T, U> c)
             => s.RightPop().Select(c).Append(c(s._4));
+
+        // To
+        public static R To<T, R>(this (T _1, T _2) self, Func<(T _1, T _2), R> fun)
+            => fun(self);
+
+        public static R To<T, R>(this (T _1, T _2, T _3) self, Func<(T _1, T _2, T _3), R> fun)
+            => fun(self);
+
+        public static R To<T, R>(this (T _1, T _2, T _3, T _4) self, Func<(T _1, T _2, T _3, T _4), R> fun)
+            => fun(self);
     }
 }
