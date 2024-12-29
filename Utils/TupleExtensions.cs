@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace Utils
 {
@@ -67,5 +68,19 @@ namespace Utils
 
         public static R To<T, R>(this (T _1, T _2, T _3, T _4) self, Func<(T _1, T _2, T _3, T _4), R> fun)
             => fun(self);
+
+
+        // AsEnumeralbe
+        public static IEnumerable<T> AsEnumerable<T>(this (T _1, T _2) s)
+        {
+            yield return s._1;
+            yield return s._2;
+        }
+
+        public static IEnumerable<T> AsEnumerable<T>(this (T _1, T _2, T _3) s)
+            => s.RightPop().AsEnumerable().Append(s._3);
+
+        public static IEnumerable<T> AsEnumerable<T>(this (T _1, T _2, T _3, T _4) s)
+            => s.RightPop().AsEnumerable().Append(s._4);
     }
 }
