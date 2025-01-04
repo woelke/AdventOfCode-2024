@@ -16,7 +16,7 @@ namespace AdventOfCode
             foreach (var file in Directory.GetFiles(InputPath))
             {
                 var split = Path.GetFileName(file).Split("_");
-                if (split.Length == 1 && solver.PuzzleSelector is null)
+                if (split.Length == 1 && (solver.PuzzleSelector is null || (solver.PuzzleSelector.HasValue && solver.PuzzleSelector.Value.Phase == "puzzle")))
                 {
                     _puzzleInput = File.ReadAllLines(file);
                 }
