@@ -21,7 +21,7 @@
         public static TResult To<TResult>(this string[] self, Func<string[], TResult> fun)
             => fun(self);
 
-        public static IEnumerable<(T, U)> Product<T, U>(this IEnumerable<T> self, IEnumerable<U> other)
+        public static IEnumerable<(T _1, U _2)> Product<T, U>(this IEnumerable<T> self, IEnumerable<U> other)
         {
             foreach (var t in self)
             {
