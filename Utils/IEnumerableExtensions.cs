@@ -9,10 +9,23 @@
         public static T Second<T>(this IEnumerable<T> self)
             => self.Skip(1).First();
 
-        public static IEnumerable<T> PrintMe<T>(this IEnumerable<T> self, string prepend = "")
+        public static IEnumerable<T> PrintMeAll<T>(this IEnumerable<T> self, string prepend = "")
         {
             Console.WriteLine($"{prepend}{string.Join(", ", self)}");
             return self;
+        }
+
+        public static IEnumerable<T> PrintMeOneByOne<T>(this IEnumerable<T> self, int? maxCount = null)
+        {
+            foreach (var (e, i) in self.WithIndex())
+            {
+                if (maxCount.HasValue)
+                    Console.WriteLine($"{i}/{maxCount}: {e}");
+                else
+                    Console.WriteLine($"{i}: {e}");
+
+                yield return e;
+            }
         }
 
         public static TResult To<TInput, TResult>(this IEnumerable<TInput> self, Func<IEnumerable<TInput>, TResult> fun)
