@@ -1,6 +1,6 @@
 ﻿using AdventOfCode;
 
-var day = new Day20();
+var day = new Day21();
 
 Console.WriteLine($"Puzzle: {day.PuzzleFolder}");
 
