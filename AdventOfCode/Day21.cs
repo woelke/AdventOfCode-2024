@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Security.Cryptography;
+using System.Text;
 using Utils;
 
 namespace AdventOfCode
@@ -16,24 +17,18 @@ namespace AdventOfCode
             public Pos Bottom() => new(X, Y + 1);
         }
 
-        static readonly List<List<char>> NumPad = [
-            [.. "789"],
-            [.. "456"],
-            [.. "123"],
-            [.. "x0A"],
-            ];
-
-        static readonly List<List<char>> DirPad = [
-            [.. "x^A"],
-            [.. "<v>"],
-            ];
-
-        record Pad(List<List<char>> Bs)
+        record NumPad()
         {
+            private static readonly List<List<char>> Bs = [
+                [.. "789"],
+                [.. "456"],
+                [.. "123"],
+                [.. "x0A"],
+                ];
 
-            char Get(Pos p) => Bs[p.Y][p.X];
+            private static char Get(Pos p) => Bs[p.Y][p.X];
 
-            Pos ToPos(char b)
+            private static Pos ToPos(char b)
             {
                 foreach (var (line, y) in Bs.WithIndex())
                 {
@@ -47,7 +42,7 @@ namespace AdventOfCode
                 throw new ArgumentException($"{b} not found");
             }
 
-            private IEnumerable<List<char>> Paths(char a, char b)
+            private static IEnumerable<string> Paths(char a, char b)
             {
                 var pa = ToPos(a);
                 var pb = ToPos(b);
@@ -64,7 +59,7 @@ namespace AdventOfCode
                         continue;
 
                     if (p == pb)
-                        yield return l.Skip(1).Select(e => e.D).Append('A').ToList();
+                        yield return string.Join(null, l.Skip(1).Select(e => e.D).Append('A'));
 
                     var dh = pb.X - p.X;
                     if (dh > 0)
@@ -80,51 +75,171 @@ namespace AdventOfCode
                 }
             }
 
-            public IEnumerable<List<char>> Paths(IEnumerable<char> input)
+            public static IEnumerable<string> Paths(string input)
             {
-                IEnumerable<IEnumerable<char>> ls = Paths(input.First(), input.Second());
-                foreach (var (a, b) in input.Skip(1).Zip(input.Skip(2)))
-                    ls = ls.Product(Paths(a, b)).Select(e => e._1.Concat(e._2));
+                IEnumerable<string> ls = Paths('A', input.First());
 
-                foreach (var l in ls)
-                    yield return l.ToList();
+                foreach (var (a, b) in input.Zip(input.Skip(1)))
+                    ls = ls.Product(Paths(a, b)).Select(e => e._1 + e._2);
+
+                return ls;
             }
         }
 
-        List<char> ShortestPath(List<char> input)
+        record DirPad()
         {
-            var numPad = new Pad(NumPad);
-            var dirPad = new Pad(DirPad);
+            private static readonly List<List<char>> Bs = [
+                [.. "x^A"],
+                [.. "<v>"],
+                ];
 
-            IEnumerable<IEnumerable<char>> p1 = numPad.Paths(input.Prepend('A'));
-            IEnumerable<IEnumerable<char>> p2 = p1.Select(e => dirPad.Paths(e.Prepend('A'))).SelectMany(e => e);
-            IEnumerable<IEnumerable<char>> p3 = p2.Select(e => dirPad.Paths(e.Prepend('A'))).SelectMany(e => e);
+            private static List<char> Path(char a, char b)
+            {
+                List<char> res = (a, b) switch
+                {
+                    ('A', '^') => ['<'],
+                    ('A', '>') => ['v'],
+                    ('A', 'v') => ['v', '<'],
+                    ('A', '<') => ['v', '<', '<'],
 
-            return p3.MinBy(e => e.Size())!.ToList();
+                    ('^', 'A') => ['>'],
+                    ('^', '>') => ['>', 'v'],
+                    ('^', 'v') => ['v'],
+                    ('^', '<') => ['v', '<'],
+
+                    ('>', 'A') => ['^'],
+                    ('>', '^') => ['^', '<'],
+                    ('>', 'v') => ['<'],
+                    ('>', '<') => ['<', '<'],
+
+                    ('v', 'A') => ['^', '>'],
+                    ('v', '>') => ['>'],
+                    ('v', '^') => ['^'],
+                    ('v', '<') => ['<'],
+
+                    ('<', 'A') => ['>', '>', '^'],
+                    ('<', '>') => ['>', '>'],
+                    ('<', '^') => ['>', '^'],
+                    ('<', 'v') => ['>'],
+
+                    (_, _) => []
+                };
+
+                res.Add('A');
+
+                return res;
+            }
+
+            public string Path(string input)
+            {
+                List<char> res = Path('A', input.First());
+
+                foreach (var (a, b) in input.Zip(input.Skip(1)))
+                    res.AddRange(Path(a, b));
+
+                return string.Join(null, res);
+            }
+
+
+            public string Path(string input, int it)
+            {
+                var res = input;
+
+                foreach (var _ in Enumerable.Range(1, it))
+                    res = Path(res);
+
+                return res;
+            }
+
+            private Dictionary<(string Input, int It), Int128> cache = [];
+
+            public Int128 PathSize(string input, int it)
+            {
+                Int128 sum = 0;
+
+                foreach (var subInput in input.Split('A').Select(e => $"{e}A").SkipLast(1))
+                {
+                    if (cache.TryGetValue((subInput, it), out var cached))
+                    {
+                        sum += cached;
+                        continue;
+                    }
+
+                    var temp = subInput;
+
+                    foreach (var _ in Enumerable.Range(1, it))
+                        temp = Path(temp);
+
+                    cache[(subInput, it)] = temp.Size();
+
+                    sum += temp.Size();
+                }
+                return sum;
+            }
+        }
+
+        Int128 ShortestPathA(string input)
+        {
+            var dirPad = new DirPad();
+
+            IEnumerable<string> p1 = NumPad.Paths(input);
+
+            p1 = p1.Select(e => dirPad.Path(e, 10));
+
+            return p1.Min(e => e.Size());
+        }
+
+
+        Int128 ShortestPathB(string input)
+        {
+            var dirPad = new DirPad();
+
+            List<Int128> lengths = [];
+
+            foreach (var ps in NumPad.Paths(input))
+            {
+                var p = dirPad.Path(ps, 13);
+                lengths.Add(dirPad.PathSize(p, 12));
+            }
+
+            return lengths.Min();
         }
 
         public string? CalcA(string[] lines, PuzzleInfo info)
         {
-            var sum = 0;
+            Int128 sum = 0;
 
             foreach (var line in lines)
             {
-
-                var path = ShortestPath(line.ToList());
+                var pathSize = ShortestPathA(line);
 
                 var num = Convert.ToInt32(line[..^1]);
 
-                sum += path.Size() * num;
+                sum += pathSize * num;
 
-                Console.WriteLine($"{line}: {path.Size()} * {num} = {path.Size() * num}");
+                Console.WriteLine($"{line}: {pathSize} * {num} = {pathSize * num}");
             }
 
             return sum.ToString();
         }
 
+
         public string? CalcB(string[] lines, PuzzleInfo info)
         {
-            return null;
+            Int128 sum = 0;
+
+            foreach (var line in lines)
+            {
+                var pathSize = ShortestPathB(line);
+
+                var num = Convert.ToInt32(line[..^1]);
+
+                sum += pathSize * num;
+
+                Console.WriteLine($"{line}: {pathSize} * {num} = {pathSize * num}");
+            }
+
+            return sum.ToString();
         }
     }
 }
