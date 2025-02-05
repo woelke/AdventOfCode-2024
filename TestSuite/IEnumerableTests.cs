@@ -22,5 +22,17 @@ namespace TestSuite
             Assert.AreEqual(2, vals.Skip(1).First());
             Assert.AreEqual(2, vals.Skip(1).First());
         }
+
+        [TestMethod]
+        public void TestTest()
+        {
+            List<int> l = [1, 2, 3, 4, 5];
+
+            foreach (var i in Enumerable.Range(0, l.Size()))
+            {
+                List<int> l1 = [.. l[0..i], .. l[(i + 1)..]];
+                Console.WriteLine($"i={i}; {(string.Join(',', l1))}");
+            }
+        }
     }
 }
